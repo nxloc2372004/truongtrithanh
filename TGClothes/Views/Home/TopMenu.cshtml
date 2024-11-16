@@ -21,14 +21,20 @@
     }
     else
     {
-        <div class="right-top-bar flex-w h-full">
-            <a href="" class="flex-c-m trans-04 p-lr-25">
-                Xin chào: @session.Name
-            </a>
+<div class="right-top-bar flex-w h-full">
+    <a href="" class="flex-c-m trans-04 p-lr-25">
+        Xin chào: @session.Name
+    </a>
 
-            <a href="/dang-xuat" class="flex-c-m trans-04 p-lr-25">
-                Đăng xuất
-            </a>
-        </div>
+    <a href="/dang-xuat" class="flex-c-m trans-04 p-lr-25">
+        Đăng xuất
+    </a>
+    @*<a href="/quen-mat-khau" class="flex-c-m trans-04 p-lr-25">
+            Đổi mật khẩu
+        </a>*@
+    <a href="@Url.Action("ForgotPassword", "User")" class="flex-c-m trans-04 p-lr-25">
+        Đổi mật khẩu
+    </a>
+</div>
     }
 </div>

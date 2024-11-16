@@ -34,10 +34,12 @@ namespace TGClothes.Controllers
         {
             get
             {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallback");
+                var uriBuilder = new UriBuilder(Request.Url)
+                {
+                    Query = null,
+                    Fragment = null,
+                    Path = Url.Action("FacebookCallback")
+                };
                 return uriBuilder.Uri;
             }
         }
@@ -252,9 +254,9 @@ namespace TGClothes.Controllers
             var verifyUrl = "/User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
-            //var fromEmail = new MailAddress(ConfigurationManager.AppSettings["FromEmailAddress"], "TGClothes");
-            //var toEmail = new MailAddress(email);
-            //var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"];
+            var fromEmail = new MailAddress(ConfigurationManager.AppSettings["FromEmailAddress"], "TGClothes");
+            var toEmail = new MailAddress(email);
+            var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"];
 
             //string subject = "";
             //string body = "";
@@ -264,18 +266,18 @@ namespace TGClothes.Controllers
                 "<a href=" + link + ">Đặt lại mật khẩu</a>";
 
             new MailHelper().SendMail(email, "Đặt lại mật khẩu", body);
-            //MailMessage mc = new MailMessage(ConfigurationManager.AppSettings["FromEmailAddress"].ToString(), email);
-            //mc.Subject = subject;
-            //mc.Body = body;
-            //mc.IsBodyHtml = true;
-            //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            //smtp.Timeout = 1000000;
-            //smtp.EnableSsl = true;
-            //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //NetworkCredential nc = new NetworkCredential(ConfigurationManager.AppSettings["FromEmailAddress"].ToString(), ConfigurationManager.AppSettings["FromEmailPassword"].ToString());
-            //smtp.UseDefaultCredentials = false;
-            //smtp.Credentials = nc;
-            //smtp.Send(mc);
+            MailMessage mc = new MailMessage(ConfigurationManager.AppSettings["FromEmailAddress"].ToString(), email);
+            mc.Subject = subject;
+            mc.Body = body;
+            mc.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Timeout = 1000000;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            NetworkCredential nc = new NetworkCredential(ConfigurationManager.AppSettings["FromEmailAddress"].ToString(), ConfigurationManager.AppSettings["FromEmailPassword"].ToString());
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = nc;
+            smtp.Send(mc);
         }
 
         public ActionResult ForgotPassword()
