@@ -32,6 +32,14 @@
                 <h6 class="m-0 font-weight-bold text-info">Số lượng đơn hàng theo mốc</h6>
                 <h6 class="m-0 font-weight-bold text-primary">Tổng doanh thu: @ViewBag.TotalRevenue.ToString("N0")</h6>
                 <h6 class="m-0 font-weight-bold text-danger">Tổng lợi nhuận: @ViewBag.TotalProfit.ToString("N0")</h6>
+
+                @using (Html.BeginForm("ExportToExcel", "RevenueStatistic", FormMethod.Post))
+                {
+                    <input type="hidden" name="fromDate" value="@Request.QueryString["fromDate"]" />
+                    <input type="hidden" name="toDate" value="@Request.QueryString["toDate"]" />
+                    <button type="submit" class="btn btn-outline-info">Xuất Excel</button>
+                }
+
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -39,6 +47,8 @@
                     <canvas id="myAreaChart"></canvas>
                 </div>
             </div>
+            
+
         </div>
     </div>
 </div>

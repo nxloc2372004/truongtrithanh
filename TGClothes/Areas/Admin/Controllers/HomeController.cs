@@ -38,8 +38,10 @@ namespace TGClothes.Areas.Admin.Controllers
             ViewBag.TotalProduct = ProductStatistic();
             ViewBag.Top10Product = Top10Product();
             ViewBag.RateOfDelivery = RateOfDelivery();
+            ViewBag.VisitorCount = MvcApplication.GetVisitorCount();
             return View();
         }
+        
 
         #region Doanh thu
         public decimal MonthlyRevenue()
@@ -90,7 +92,7 @@ namespace TGClothes.Areas.Admin.Controllers
             ViewBag.RevenueOfProduct = revenueOfProduct;
             return data;
         }
-
+       
         public bool RateOfDelivery ()
         {
             var success = _orderService.GetAll().Where(x => x.Status == (int)OrderStatus.SUCCESSFUL).Count();

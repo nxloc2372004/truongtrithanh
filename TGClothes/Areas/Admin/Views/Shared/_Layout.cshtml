@@ -12,6 +12,8 @@
     <title>Trang quản trị</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="icon" type="image/png" href="/Assets/Client/images/icons/fav.png" />
+
     <link href="/Assets/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -58,7 +60,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                
+
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Đăng xuất
@@ -77,9 +79,9 @@
                     <h1 class="h3 mb-4 text-gray-800">@RenderSection("header", required: true)</h1>
                     @if (TempData["AlertMessage"] != null)
                     {
-        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-            @TempData["AlertMessage"]
-        </div>}
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                            @TempData["AlertMessage"]
+                        </div>}
                     @RenderBody()
                 </div>
                 <!-- /.container-fluid -->
@@ -90,7 +92,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Nhóm 09</span>
+                        <span> Nhóm 22</span>
                     </div>
                 </div>
             </footer>
@@ -141,6 +143,7 @@
     <script src="~/Assets/Admin/js/sb-admin-2.min.js"></script>
     @*@Scripts.Render("~/bundles/adminjs")*@
     @RenderSection("CustomJs", false)
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

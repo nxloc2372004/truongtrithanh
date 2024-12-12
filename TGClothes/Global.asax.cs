@@ -1,4 +1,4 @@
-using Data.Services;
+﻿using Data.Services;
 using Data.Services.ServiceImpl;
 using System;
 using System.Collections.Generic;
@@ -14,12 +14,30 @@ namespace TGClothes
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static int _visitorCount = 0; // Biến tĩnh để lưu số người truy cập
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            // Khi một session mới được khởi tạo, tăng số người truy cập
+            System.Threading.Interlocked.Increment(ref _visitorCount);
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            // Khi một session kết thúc, giảm số người truy cập (không bắt buộc)
+            System.Threading.Interlocked.Decrement(ref _visitorCount);
+        }
+
+        public static int GetVisitorCount()
+        {
+            return _visitorCount;
+        }
         protected void Application_Start()
         {
             // T?o m?t Unity Container
             var container = new UnityContainer();
 
-            // ??ng k� c�c ph? thu?c
+            // ??ng ký các ph? thu?c
             container.RegisterType<IAccountService, AccountService>();
             container.RegisterType<INewsCategoryService, NewsCategoryService>();
             container.RegisterType<INewsService, NewsService>();

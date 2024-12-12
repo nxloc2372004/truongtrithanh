@@ -1,4 +1,5 @@
 ﻿using Data.Services;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,23 @@ namespace TGClothes.Areas.Admin.Controllers
         }
 
         // GET: Admin/Feedback
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
-            var model = _feedbackService.GetAll();
-            return View(model);
+            var feedbacks = _feedbackService.GetAll()
+                                            .OrderByDescending(x => x.CreatedDate)
+                                            .ToList();
+
+            int totalRecords = feedbacks.Count();
+            var pagedFeedbacks = feedbacks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+
+            return View(pagedFeedbacks);
         }
+
+
 
         [HttpDelete]
         public ActionResult Delete(long id)

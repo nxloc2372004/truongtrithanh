@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TGClothes.Models.ProductStatistic>
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr class="text-center">
+            <th class="text-left">Tên sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Số lượng bán</th>
+            <th>Giá bán</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td class="text-left">@item.Product.Name</td>
+                <td><img src="@item.Product.Image" height="100px" /></td>
+                <td>@item.ProductSold</td>
+                <td>@item.Price.ToString("N0")</td>
+                <td>@((item.ProductSold * item.Price).ToString("N0"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
