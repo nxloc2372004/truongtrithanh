@@ -18,9 +18,9 @@ namespace TGClothes.Areas.Admin.Controllers
         private readonly IProductService _productService;
 
         public HomeController(
-            IOrderDetailService orderDetailService, 
-            IAccountService userService, 
-            IOrderService orderService, 
+            IOrderDetailService orderDetailService,
+            IAccountService userService,
+            IOrderService orderService,
             IProductService productService)
         {
             _orderDetailService = orderDetailService;
@@ -28,6 +28,7 @@ namespace TGClothes.Areas.Admin.Controllers
             _orderService = orderService;
             _productService = productService;
         }
+
         // GET: Admin/Home
         public ActionResult Index()
         {
@@ -38,10 +39,20 @@ namespace TGClothes.Areas.Admin.Controllers
             ViewBag.TotalProduct = ProductStatistic();
             ViewBag.Top10Product = Top10Product();
             ViewBag.RateOfDelivery = RateOfDelivery();
-            ViewBag.VisitorCount = MvcApplication.GetVisitorCount();
+            
+            ViewBag.OnlineUsers = MvcApplication.OnlineUsers;  // Đếm số người online
+
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult DecreaseOnlineUser()
+        {
+            if (MvcApplication.OnlineUsers > 0)
+            {
+                MvcApplication.OnlineUsers--;  // Giảm số người online
+            }
+            return Json(new { success = true });
+        }
 
         #region Doanh thu
         public decimal MonthlyRevenue()

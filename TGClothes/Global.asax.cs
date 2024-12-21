@@ -16,22 +16,19 @@ namespace TGClothes
     {
         private static int _visitorCount = 0; // Biến tĩnh để lưu số người truy cập
 
+        public static int OnlineUsers = 0;  // Biến tĩnh để đếm người online
+
+       
+
         protected void Session_Start(object sender, EventArgs e)
         {
-            // Khi một session mới được khởi tạo, tăng số người truy cập
-            System.Threading.Interlocked.Increment(ref _visitorCount);
+            OnlineUsers++;  // Tăng số người online khi có session mới
         }
 
         protected void Session_End(object sender, EventArgs e)
         {
-            // Khi một session kết thúc, giảm số người truy cập (không bắt buộc)
-            System.Threading.Interlocked.Decrement(ref _visitorCount);
-        }
-
-        public static int GetVisitorCount()
-        {
-            return _visitorCount;
-        }
+            OnlineUsers--;  // Giảm số người online khi session kết thúc
+        } 
         protected void Application_Start()
         {
             // T?o m?t Unity Container

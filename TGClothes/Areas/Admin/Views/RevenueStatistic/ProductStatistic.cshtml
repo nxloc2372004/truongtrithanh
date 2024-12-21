@@ -30,17 +30,16 @@
                 </div>
             </div>
 
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label class="lb-caption">Chọn lọc:</label>
-                    <select name="filterType" class="form-control custom-select" onchange="this.form.submit()">
-                        <option value="Chọn lọc" @(filterType == "All" ? "selected" : "")>Tất cả sản phẩm</option>
-                        <option value="All" @(filterType == "All" ? "selected" : "")>Chọn lọc</option>
-                        <option value="Top5" @(filterType == "Top5" ? "selected" : "")>Top 5 bán chạy</option>
-                        <option value="Bottom5" @(filterType == "Bottom5" ? "selected" : "")>Top 5 bán ế</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="filterType" class="font-weight-bold">Chọn lọc sản phẩm:</label>
+                <select name="filterType" id="filterType" class="form-control custom-select" onchange="this.form.submit()">
+                    <option value="All" @(filterType == "All" ? "selected" : "")>Tất cả sản phẩm</option>
+                    <option value="Top5" @(filterType == "Top5" ? "selected" : "")>Top 5 bán chạy</option>
+                    <option value="Bottom5" @(filterType == "Bottom5" ? "selected" : "")>Top 5 bán ế</option>
+                </select>
             </div>
+
+       
         }
 
         <!-- Table displaying product statistics -->
@@ -83,6 +82,52 @@
     </div>
 </div>
 <style>
+    /* Cải thiện giao diện combobox */
+    select.form-control.custom-select {
+        border-radius: 0.375rem; /* Bo góc mềm mại */
+        padding: 0.5rem 1rem; /* Thêm khoảng cách bên trong */
+        font-size: 1rem; /* Kích thước chữ vừa phải */
+        color: #495057; /* Màu chữ tối để dễ đọc */
+        background-color: #ffffff; /* Màu nền trắng */
+        background-image: none; /* Loại bỏ mũi tên mặc định */
+        border: 1px solid #ced4da; /* Viền mờ, sạch sẽ */
+        appearance: none; /* Loại bỏ kiểu dáng mặc định của các trình duyệt */
+        transition: all 0.3s ease; /* Thêm hiệu ứng chuyển động khi focus */
+    }
+
+        select.form-control.custom-select:focus {
+            border-color: #80bdff; /* Viền màu xanh khi focus */
+            background-color: #f1faff; /* Nền sáng khi focus */
+            outline: none; /* Loại bỏ outline mặc định */
+        }
+
+        /* Thêm hiệu ứng hover khi di chuột qua combobox */
+        select.form-control.custom-select:hover {
+            border-color: #5c9cfa; /* Viền chuyển màu khi hover */
+            background-color: #e9f3ff; /* Nền chuyển màu khi hover */
+        }
+
+        /* Tạo hiệu ứng khi người dùng chọn combobox */
+        select.form-control.custom-select:disabled {
+            background-color: #f1f1f1; /* Màu nền khi combobox bị vô hiệu hóa */
+            color: #a0a0a0; /* Màu chữ khi bị vô hiệu hóa */
+        }
+
+        /* Ẩn mũi tên của combobox trong IE */
+        select.form-control.custom-select::-ms-expand {
+            display: none;
+        }
+
+        /* Thêm mũi tên đẹp hơn cho combobox trên các trình duyệt khác */
+        select.form-control.custom-select:after {
+            content: '\f0d7'; /* Mã unicode cho mũi tên */
+            font-family: FontAwesome; /* Dùng font FontAwesome */
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
     select.form-control {
         border-radius: 0.375rem;
         padding: 0.5rem 1rem;

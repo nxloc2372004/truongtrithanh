@@ -233,6 +233,7 @@ namespace TGClothes.Areas.Admin.Controllers
             // Paginate the result
             var data = result.ToPagedList(page, pageSize);
 
+            ViewBag.FilterType = filterType;
             // Tính tổng số lượng sản phẩm bán
             ViewBag.TotalProductSold = result.Sum(x => x.ProductSold);
 
